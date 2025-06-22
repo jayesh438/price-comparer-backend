@@ -10,7 +10,11 @@ const PORT = process.env.PORT || 3000;
 
 app.post('/compare-prices', async (req, res) => {
   const { productName } = req.body;
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
+
   const results = [];
 
   try {
